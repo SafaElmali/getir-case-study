@@ -1,0 +1,6 @@
+.header__form {
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  justify-content: space-between;
+}
