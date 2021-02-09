@@ -1,5 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectTodoList } from "../../features/todo/todoSlice";
 import TodoItem from "./components/TodoItem";
 
 const todoList = [
@@ -31,6 +33,8 @@ const todoList = [
 ];
 
 const TodoList = () => {
+  const todo = useSelector(selectTodoList);
+
   return (
     <Box mt={5}>
       <Flex fontStyle={"italic"} justifyContent="center" alignItems="center">

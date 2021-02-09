@@ -8,12 +8,37 @@ import {
   Divider,
   Text,
 } from "@chakra-ui/react";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../features/todo/todoSlice";
 import "./Header.css";
 
 const Header = () => {
+  const [todo, setTodo] = useState({ content: "", isChecked: false });
+  const userInput = useRef();
+  const dispatch = useDispatch();
+
+  const handleAddTodo = () => {
+    dispatch(
+      addItem({ content: userInput.current.value, isChecked: todo.isChecked })
+    );
+    setTodo({ content: "", isChecked: false });
+  };
+
+  const handleUserInput = () => {
+    setTodo((prevTodo) => {
+      return { ...prevTodo, content: userInput.current.value };
+    });
+  };
+
   return (
     <header>
-      <Flex mt={5} fontStyle="italic" justifyContent="center" alignItems="center">
+      <Flex
+        mt={5}
+        fontStyle="italic"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Heading color={"#FFD300"}>Getir</Heading>
         <Text
           ml={3}
@@ -26,25 +51,37 @@ const Header = () => {
           Todo
         </Text>
       </Flex>
-      <Box
-        mt={5}
-        padding={5}
-        borderRadius={15}
-        backgroundColor="#fff"
-      >
+      <Box mt={5} padding={5} borderRadius={15} backgroundColor="#fff">
         <Box>
           <Heading fontSize={"xl"}>Enter a to-do</Heading>
           <Box>
             <Flex className="header__form">
               <Box flexGrow={8}>
-                <Input placeholder="enter a to-do..." />
+                <Input
+                  placeholder="enter a to-do..."
+                  value={todo.content}
+                  ref={userInput}
+                  onChange={handleUserInput}
+                />
               </Box>
               <Divider mt={3} mb={3} />
               <Flex alignItems="center" flexGrow={2} justifyContent="flex-end">
-                <Checkbox mr={3} defaultIsChecked>
+                <Checkbox
+                  mr={3}
+                  onChange={(e) =>
+                    setTodo((prevTodo) => {
+                      return { ...prevTodo, isChecked: e.target.checked };
+                    })
+                  }
+                  isChecked={todo.isChecked}
+                >
                   Completed ?{" "}
                 </Checkbox>
-                <Button backgroundColor="#FFD300" color="#5E3EBC">
+                <Button
+                  onClick={handleAddTodo}
+                  backgroundColor="#FFD300"
+                  color="#5E3EBC"
+                >
                   Save
                 </Button>
               </Flex>

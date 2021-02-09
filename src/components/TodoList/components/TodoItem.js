@@ -53,6 +53,7 @@ const TodoItem = ({ todo }) => {
             />
             {}
             <BsCheckBox
+              cursor="pointer"
               fill={"green"}
               size={"2em"}
               style={{ marginLeft: 15 }}
