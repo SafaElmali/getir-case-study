@@ -18,7 +18,7 @@ todosRouter.post("/", (req, res, next) => {
 
   todo
     .save()
-    .then((savedTodo) => res.json(savedTodo.toJSON))
+    .then((savedTodo) => res.json(savedTodo.toJSON()))
     .catch((error) => console.log(error));
 });
 
