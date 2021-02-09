@@ -2,17 +2,30 @@ import React, { useRef, useState } from "react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { Box, Flex, Text, Checkbox, Input } from "@chakra-ui/react";
 import { BsFillTrashFill, BsPencilSquare, BsCheckBox } from "react-icons/bs";
+import { MdCancel } from "react-icons/md";
+
 import "./TodoItem.css";
+import { useDispatch } from "react-redux";
+import { editTodoAction } from "../../../features/todo/todoSlice";
 
-const TodoItem = ({ todo }) => {
-  const [isChecked, setIsChecked] = useState(todo.isChecked);
+const TodoItem = ({ item }) => {
+  const [todo, setTodo] = useState(item);
   const [isEdit, setIsEdit] = useState(false);
-  const [inputValue, setInputValue] = useState(todo.content);
   const editInput = useRef();
+  const dispatch = useDispatch();
 
-  /* Get current input value from user */
-  const handleTodoEdit = () => {
-    setInputValue(editInput.current.value);
+  const handleTodoInput = () => {
+    setTodo((prevTodo) => {
+      return {
+        ...prevTodo,
+        content: editInput.current.value,
+      };
+    });
+  };
+
+  const handleUpdateTodo = () => {
+    dispatch(editTodoAction(todo));
+    setIsEdit(false);
   };
 
   return (
@@ -26,17 +39,37 @@ const TodoItem = ({ todo }) => {
           <>
             <Flex flexGrow={1}>
               <Checkbox
-                isChecked={isChecked}
+                isChecked={todo.isChecked}
                 size="lg"
                 icon={<CheckIcon />}
                 colorScheme="purple"
                 mr={3}
-                onChange={(e) => setIsChecked(e.target.checked)}
+                onChange={() => {
+                  dispatch(
+                    editTodoAction({
+                      ...todo,
+                      isChecked: !todo.isChecked,
+                    })
+                  );
+                  setTodo((prevTodo) => {
+                    return {
+                      ...prevTodo,
+                      isChecked: !todo.isChecked,
+                    };
+                  });
+                }}
               />
               <Text
                 cursor="pointer"
-                onClick={() => setIsChecked(!isChecked)}
-                className={isChecked ? "todo__text--checked" : null}
+                onClick={() =>
+                  setTodo((prevTodo) => {
+                    return {
+                      ...prevTodo,
+                      isChecked: !todo.isChecked,
+                    };
+                  })
+                }
+                className={todo.isChecked ? "todo__text--checked" : null}
               >
                 {todo.content}
               </Text>
@@ -47,14 +80,21 @@ const TodoItem = ({ todo }) => {
             <Input
               type="text"
               placeholder="edit to-do..."
-              value={inputValue}
+              value={todo.content}
               ref={editInput}
-              onChange={handleTodoEdit}
+              onChange={handleTodoInput}
             />
             {}
             <BsCheckBox
               cursor="pointer"
               fill={"green"}
+              size={"2em"}
+              style={{ marginLeft: 15 }}
+              onClick={handleUpdateTodo}
+            />
+            <MdCancel
+              cursor="pointer"
+              fill={"gray"}
               size={"2em"}
               style={{ marginLeft: 15 }}
               onClick={() => setIsEdit(!isEdit)}

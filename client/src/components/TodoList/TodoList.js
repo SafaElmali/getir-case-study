@@ -4,34 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTodoAction } from "../../features/todo/todoSlice";
 import TodoItem from "./components/TodoItem";
 
-// const todoList = [
-//   {
-//     id: 0,
-//     content: "Getir",
-//     checked: false,
-//   },
-//   {
-//     id: 0,
-//     content: "Getir Yemek",
-//     checked: false,
-//   },
-//   {
-//     id: 0,
-//     content: "Getir Büyük",
-//     checked: true,
-//   },
-//   {
-//     id: 0,
-//     content: "Getir Su",
-//     checked: false,
-//   },
-//   {
-//     id: 0,
-//     content: "Getir Global",
-//     checked: true,
-//   },
-// ];
-
 const TodoList = () => {
   const { todoList } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
@@ -59,7 +31,7 @@ const TodoList = () => {
       </Flex>
       {todoList.length > 0
         ? todoList.map((todo, index) => {
-            return <TodoItem todo={todo} key={index} />;
+            return <TodoItem item={todo} key={index} />;
           })
         : null}
     </Box>

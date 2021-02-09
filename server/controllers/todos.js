@@ -22,4 +22,26 @@ todosRouter.post("/", (req, res, next) => {
     .catch((error) => console.log(error));
 });
 
+todosRouter.put("/:id", (req, res) => {
+  const body = req.body;
+
+  const todo = {
+    content: body.content,
+    isChecked: body.isChecked,
+  };
+
+  /* add useFindAndModify to solve deprecated warning
+   * DeprecationWarning:
+   * Mongoose: `findOneAndUpdate()` and `findOneAndDelete()`
+   * without the `useFindAndModify`
+   * option set to false are deprecated.
+   * See: https://mongoosejs.com/docs/deprecations.html#findandmodify
+   */
+  Todo.findByIdAndUpdate(req.params.id, todo, { useFindAndModify: false })
+    .then((updatedTodo) => {
+      res.json(updatedTodo.toJSON());
+    })
+    .catch((err) => console.log(err));
+});
+
 module.exports = todosRouter;
