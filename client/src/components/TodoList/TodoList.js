@@ -1,46 +1,45 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTodos, selectTodoList } from "../../features/todo/todoSlice";
+import { fetchTodoAction } from "../../features/todo/todoSlice";
 import TodoItem from "./components/TodoItem";
 
-const todoList = [
-  {
-    id: 0,
-    content: "Getir",
-    checked: false,
-  },
-  {
-    id: 0,
-    content: "Getir Yemek",
-    checked: false,
-  },
-  {
-    id: 0,
-    content: "Getir Büyük",
-    checked: true,
-  },
-  {
-    id: 0,
-    content: "Getir Su",
-    checked: false,
-  },
-  {
-    id: 0,
-    content: "Getir Global",
-    checked: true,
-  },
-];
+// const todoList = [
+//   {
+//     id: 0,
+//     content: "Getir",
+//     checked: false,
+//   },
+//   {
+//     id: 0,
+//     content: "Getir Yemek",
+//     checked: false,
+//   },
+//   {
+//     id: 0,
+//     content: "Getir Büyük",
+//     checked: true,
+//   },
+//   {
+//     id: 0,
+//     content: "Getir Su",
+//     checked: false,
+//   },
+//   {
+//     id: 0,
+//     content: "Getir Global",
+//     checked: true,
+//   },
+// ];
 
 const TodoList = () => {
-  const todo = useSelector(selectTodoList);
-  console.log(todo);
-
+  const { todoList } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
+  console.log(todoList);
 
   useEffect(() => {
-    dispatch(fetchTodos());
-  }, []);
+    dispatch(fetchTodoAction());
+  }, [dispatch]);
 
   return (
     <Box mt={5}>

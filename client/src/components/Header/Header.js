@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../features/todo/todoSlice";
+import { addTodoAction } from "../../features/todo/todoSlice";
 import "./Header.css";
 
 const Header = () => {
@@ -19,10 +19,8 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleAddTodo = () => {
-    dispatch(
-      addTodo({ content: userInput.current.value, isChecked: todo.isChecked })
-    );
-    // setTodo({ content: "", isChecked: false });
+    dispatch(addTodoAction(todo));
+    setTodo({ content: "", isChecked: false });
   };
 
   const handleUserInput = () => {
@@ -70,7 +68,7 @@ const Header = () => {
                   mr={3}
                   onChange={(e) =>
                     setTodo((prevTodo) => {
-                      return { ...prevTodo, isChecked: e.target.checked };
+                      return { ...prevTodo, isChecked: !todo.isChecked };
                     })
                   }
                   isChecked={todo.isChecked}

@@ -5,7 +5,7 @@ import { BsFillTrashFill, BsPencilSquare, BsCheckBox } from "react-icons/bs";
 import "./TodoItem.css";
 
 const TodoItem = ({ todo }) => {
-  const [isChecked, setIsChecked] = useState(todo.checked);
+  const [isChecked, setIsChecked] = useState(todo.isChecked);
   const [isEdit, setIsEdit] = useState(false);
   const [inputValue, setInputValue] = useState(todo.content);
   const editInput = useRef();

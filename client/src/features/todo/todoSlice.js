@@ -1,18 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchTodos = createAsyncThunk("api/todos/", async () => {
-  const response = await axios.get("http://localhost:3001/api/todos");
-  return response.data;
-});
-
-export const addTodo = createAsyncThunk("api/todos/", async (todo) => {
-  const response = await axios.post("http://localhost:3001/api/todos", {
-    content: todo.content,
-    isChecked: todo.isChecked,
-  });
-  return response.data;
-});
+/* Slice */
 
 export const todoSlice = createSlice({
   name: "todo",
@@ -21,24 +10,35 @@ export const todoSlice = createSlice({
   },
 
   reducers: {
-    addItem: (state, action) => {
-      // postTodo(action.payload);
-    },
-  },
-  extraReducers: {
-    [fetchTodos.fulfilled]: (state, action) => {
-      state.todoList = action.payload;
-    },
-    [addTodo.fulfilled]: (state, action) => {
+    addTodo: (state, action) => {
+      console.log(action);
       state.todoList.push(action.payload);
+    },
+    getTodos: (state, action) => {
+      state.todoList = action.payload;
     },
   },
 });
 
-export const { addItem } = todoSlice.actions;
+/* Actions */
 
-export const selectTodoList = (state) => {
-  return state.todo.todoList;
+export const { addTodo, getTodos } = todoSlice.actions;
+
+export const fetchTodoAction = () => async (dispatch) => {
+  try {
+    const response = await axios.get("http://localhost:3000/api/todos");
+    dispatch(getTodos(response.data));
+  } catch (er) {
+    return console.error(er.message);
+  }
+};
+
+export const addTodoAction = (todo) => async (dispatch) => {
+  const response = await axios.post("http://localhost:3000/api/todos", {
+    content: todo.content,
+    isChecked: todo.isChecked,
+  });
+  dispatch(addTodo(response.data));
 };
 
 export default todoSlice.reducer;
