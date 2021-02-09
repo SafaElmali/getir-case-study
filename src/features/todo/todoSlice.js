@@ -9,7 +9,10 @@ export const todoSlice = createSlice({
     addItem: (state, action) => {
       return {
         ...state,
-        todoList: [action.payload, ...state.todoList],
+        todoList: [
+          ...state.todoList,
+          { id: state.todoList.length, ...action.payload },
+        ],
       };
     },
   },
