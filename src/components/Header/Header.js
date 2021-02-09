@@ -6,17 +6,28 @@ import {
   Button,
   Checkbox,
   Divider,
+  Text,
 } from "@chakra-ui/react";
 import "./Header.css";
 
 const Header = () => {
   return (
     <header>
+      <Flex mt={5} fontStyle="italic" justifyContent="center" alignItems="center">
+        <Heading color={"#FFD300"}>Getir</Heading>
+        <Text
+          ml={3}
+          mr={3}
+          mt={2}
+          fontSize="2xl"
+          fontWeight="bold"
+          color={"#fff"}
+        >
+          Todo
+        </Text>
+      </Flex>
       <Box
-        position="relative"
-        top="50px"
-        maxWidth="80%"
-        margin="auto"
+        mt={5}
         padding={5}
         borderRadius={15}
         backgroundColor="#fff"
