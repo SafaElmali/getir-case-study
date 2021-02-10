@@ -5,10 +5,8 @@ import { BsFillTrashFill, BsPencilSquare, BsCheckBox } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import "./TodoItem.css";
 import { useDispatch } from "react-redux";
-import {
-  deleteTodoAction,
-  editTodoAction,
-} from "../../../features/todo/todoSlice";
+import { deleteTodoAction, editTodoAction } from "../../../services/todos";
+
 
 const TodoItem = ({ item }) => {
   const [todo, setTodo] = useState(item);
@@ -67,14 +65,20 @@ const TodoItem = ({ item }) => {
               />
               <Text
                 cursor="pointer"
-                onClick={() =>
+                onClick={() => {
+                  dispatch(
+                    editTodoAction({
+                      ...todo,
+                      isChecked: !todo.isChecked,
+                    })
+                  );
                   setTodo((prevTodo) => {
                     return {
                       ...prevTodo,
                       isChecked: !todo.isChecked,
                     };
-                  })
-                }
+                  });
+                }}
                 className={todo.isChecked ? "todo__text--checked" : null}
               >
                 {todo.content}

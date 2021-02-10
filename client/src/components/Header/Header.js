@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodoAction } from "../../features/todo/todoSlice";
+import { addTodoAction } from "../../services/todos";
 import "./Header.css";
 
 const Header = () => {

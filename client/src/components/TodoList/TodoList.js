@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTodoAction } from "../../features/todo/todoSlice";
+import { fetchTodoAction } from "../../services/todos";
 import TodoItem from "./components/TodoItem";
 
 const TodoList = () => {
@@ -28,11 +28,15 @@ const TodoList = () => {
           List
         </Text>
       </Flex>
-      {todoList.length > 0
-        ? todoList.map((todo, index) => {
-            return <TodoItem item={todo} key={index} />;
-          })
-        : null}
+      {todoList.length > 0 ? (
+        todoList.map((todo, index) => {
+          return <TodoItem item={todo} key={index} />;
+        })
+      ) : (
+        <Box mt={4} color="#fff">
+          <Text textAlign="center">There is no to-do item...</Text>
+        </Box>
+      )}
     </Box>
   );
 };
