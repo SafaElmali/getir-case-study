@@ -44,6 +44,13 @@ todosRouter.put("/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+/* add useFindAndModify to solve deprecated warning
+ * DeprecationWarning:
+ * Mongoose: `findOneAndUpdate()` and `findOneAndDelete()`
+ * without the `useFindAndModify`
+ * option set to false are deprecated.
+ * See: https://mongoosejs.com/docs/deprecations.html#findandmodify
+ */
 todosRouter.delete("/:id", (req, resp) => {
   Todo.findByIdAndRemove(req.params.id, { useFindAndModify: false })
     .then(() => {
