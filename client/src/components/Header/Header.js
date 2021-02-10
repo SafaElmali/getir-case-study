@@ -65,6 +65,7 @@ const Header = () => {
               <Divider mt={3} mb={3} />
               <Flex alignItems="center" flexGrow={2} justifyContent="flex-end">
                 <Checkbox
+                  colorScheme="purple"
                   mr={3}
                   onChange={(e) =>
                     setTodo((prevTodo) => {
