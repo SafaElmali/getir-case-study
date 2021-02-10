@@ -14,12 +14,16 @@ export const todoSlice = createSlice({
       state.todoList = action.payload;
     },
     addTodo: (state, action) => {
-      console.log(action);
       state.todoList.push(action.payload);
     },
-    updateTodos: (state, action) => {
+    updateTodo: (state, action) => {
       state.todoList = state.todoList.map((todo) =>
         todo.id !== action.payload.id ? todo : action.payload
+      );
+    },
+    deleteTodo: (state, action) => {
+      state.todoList = state.todoList.filter(
+        (todo) => todo.id !== action.payload
       );
     },
   },
@@ -27,7 +31,7 @@ export const todoSlice = createSlice({
 
 /* Actions */
 
-export const { addTodo, getTodos, updateTodos } = todoSlice.actions;
+export const { addTodo, getTodos, updateTodo, deleteTodo } = todoSlice.actions;
 
 export const fetchTodoAction = () => async (dispatch) => {
   try {
@@ -47,15 +51,19 @@ export const addTodoAction = (todo) => async (dispatch) => {
 };
 
 export const editTodoAction = (todo) => async (dispatch) => {
-  console.log(todo);
   const response = await axios.put(
     `http://localhost:3000/api/todos/${todo.id}`,
     {
       content: todo.content,
       isChecked: todo.isChecked,
-    },
+    }
   );
-  dispatch(updateTodos(response.data));
+  dispatch(updateTodo(response.data));
+};
+
+export const deleteTodoAction = (id) => async (dispatch) => {
+  await axios.delete(`http://localhost:3000/api/todos/${id}`);
+  dispatch(deleteTodo(id));
 };
 
 export default todoSlice.reducer;

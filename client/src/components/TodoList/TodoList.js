@@ -7,11 +7,10 @@ import TodoItem from "./components/TodoItem";
 const TodoList = () => {
   const { todoList } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
-  console.log(todoList);
 
   useEffect(() => {
     dispatch(fetchTodoAction());
-  }, [dispatch]);
+  }, []);
 
   return (
     <Box mt={5}>

@@ -3,10 +3,12 @@ import { CheckIcon } from "@chakra-ui/icons";
 import { Box, Flex, Text, Checkbox, Input } from "@chakra-ui/react";
 import { BsFillTrashFill, BsPencilSquare, BsCheckBox } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
-
 import "./TodoItem.css";
 import { useDispatch } from "react-redux";
-import { editTodoAction } from "../../../features/todo/todoSlice";
+import {
+  deleteTodoAction,
+  editTodoAction,
+} from "../../../features/todo/todoSlice";
 
 const TodoItem = ({ item }) => {
   const [todo, setTodo] = useState(item);
@@ -26,6 +28,10 @@ const TodoItem = ({ item }) => {
   const handleUpdateTodo = () => {
     dispatch(editTodoAction(todo));
     setIsEdit(false);
+  };
+
+  const handleTodoDelete = () => {
+    dispatch(deleteTodoAction(todo.id));
   };
 
   return (
@@ -103,6 +109,7 @@ const TodoItem = ({ item }) => {
         )}
         <Flex
           flexDirection="row"
+          alignItems="center"
           flexWrap="wrap"
           ml={4}
           className="todo__action-container"
@@ -117,7 +124,11 @@ const TodoItem = ({ item }) => {
               onClick={() => setIsEdit(!isEdit)}
             />
           ) : null}
-          <BsFillTrashFill fill={"#e53e3e"} size={"1.5em"} />
+          <BsFillTrashFill
+            fill={"#e53e3e"}
+            size={"1.5em"}
+            onClick={handleTodoDelete}
+          />
         </Flex>
       </Flex>
     </Box>

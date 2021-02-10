@@ -44,4 +44,12 @@ todosRouter.put("/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+todosRouter.delete("/:id", (req, resp) => {
+  Todo.findByIdAndRemove(req.params.id, { useFindAndModify: false })
+    .then(() => {
+      resp.status(204).end();
+    })
+    .catch((error) => console.log(error));
+});
+
 module.exports = todosRouter;
