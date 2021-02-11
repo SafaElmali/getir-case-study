@@ -37,6 +37,9 @@ This repo contains frontend and backend folders.
 
 ## TODO List
 
+- [x] GET Todo List action
+- [x] POST Todo action
+- [x] PUT Todo action
 - [ ] Delete action
 
 ## License
