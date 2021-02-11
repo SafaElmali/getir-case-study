@@ -3,7 +3,7 @@
 # 📝 Getir Case Study 📝
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-<i>Just a simple to-do list project </i>
+<i>Just a simple to-do list project using [React](https://tr.reactjs.org/) and [Redux](https://redux.js.org/) </i>
 
 <img src="https://user-images.githubusercontent.com/17435062/107618062-0025bc80-6c62-11eb-8707-375d6908b512.png" alt="target 68 bell" width="600"/>
 
