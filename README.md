@@ -35,6 +35,10 @@ This repo contains frontend and backend folders.
 
 - In the root folder run ```npm run start```
 
+## TODO List
+
+- [ ] Delete action
+
 ## License
 
 getir-case-study is [MIT licensed](./LICENSE).
