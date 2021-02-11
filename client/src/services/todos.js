@@ -7,7 +7,7 @@ import {
   getTodos,
   updateTodo,
 } from "../features/todo/todoSlice";
-const baseUrl = "api/todos/";
+const baseUrl = "https://getir-case-study-project.herokuapp.com/api/todos/";
 
 export const fetchTodoAction = () => async (dispatch) => {
   try {
