@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
 import {
@@ -6,7 +7,7 @@ import {
   getTodos,
   updateTodo,
 } from "../features/todo/todoSlice";
-const baseUrl = "/api/todos";
+const baseUrl = "api/todos/";
 
 export const fetchTodoAction = () => async (dispatch) => {
   try {

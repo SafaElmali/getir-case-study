@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
