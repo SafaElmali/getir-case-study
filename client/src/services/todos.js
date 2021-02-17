@@ -38,5 +38,3 @@ export const deleteTodoAction = (id) => async (dispatch) => {
   await axios.delete(`${baseUrl}/${id}`);
   dispatch(deleteTodo(id));
 };
-
-export default { fetchTodoAction, addTodoAction, editTodoAction };
